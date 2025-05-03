@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "560387211823",
+    "firebase_url": "https://screen-monitoring-4ec59-default-rtdb.firebaseio.com",
+    "project_id": "screen-monitoring-4ec59",
+    "storage_bucket": "screen-monitoring-4ec59.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560387211823:android:8a42332e36d118b194fcda",
+        "android_client_info": {
+          "package_name": "com.example.screen_monitoring"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0UOT8mte5g4ZtcaDaqmUE1YhhtyOrBWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560387211823:android:6a14172c94d2ea6194fcda",
+        "android_client_info": {
+          "package_name": "com.sloth.ScreenWatcher"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0UOT8mte5g4ZtcaDaqmUE1YhhtyOrBWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
