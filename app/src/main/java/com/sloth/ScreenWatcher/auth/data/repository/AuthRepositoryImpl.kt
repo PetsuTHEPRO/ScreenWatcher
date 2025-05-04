@@ -4,9 +4,8 @@ import com.sloth.ScreenWatcher.auth.data.datasource.AuthRemoteDataSource
 import com.sloth.ScreenWatcher.auth.domain.model.AuthUser
 import com.sloth.ScreenWatcher.auth.domain.repository.AuthRepository
 import com.sloth.ScreenWatcher.util.Resource
-import javax.inject.Inject
 
-class AuthRepositoryImpl @Inject constructor(
+class AuthRepositoryImpl(
     private val remoteDataSource: AuthRemoteDataSource
 ) : AuthRepository {
 
@@ -19,23 +18,19 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun register(
-        email: String,
-        password: String,
-        username: String
-    ): Resource<AuthUser> {
+    override suspend fun register(email: String, password: String, username: String): Result<Unit> {
+        return remoteDataSource.register(email, password, username)
+    }
+
+    override suspend fun logout(){
         TODO("Not yet implemented")
     }
 
-    override suspend fun logout(): Resource<Unit> {
+    override fun getCurrentUser() {
         TODO("Not yet implemented")
     }
 
-    override fun getCurrentUser(): AuthUser? {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun updateUserStatus(isOnline: Boolean): Resource<Unit> {
+    override suspend fun updateUserStatus(isOnline: Boolean) {
         TODO("Not yet implemented")
     }
 }

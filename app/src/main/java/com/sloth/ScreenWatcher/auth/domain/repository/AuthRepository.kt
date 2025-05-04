@@ -4,17 +4,17 @@ import com.sloth.ScreenWatcher.auth.domain.model.AuthUser
 import com.sloth.ScreenWatcher.util.Resource
 
 interface AuthRepository {
-    suspend fun login(email: String, password: String): Resource<AuthUser>
+    suspend fun login(username: String, password: String): Resource<AuthUser>
 
     suspend fun register(
         email: String,
         password: String,
         username: String
-    ): Resource<AuthUser>
+    ): Result<Unit>
 
-    suspend fun logout(): Resource<Unit>
+    suspend fun logout()
 
-    fun getCurrentUser(): AuthUser?
+    fun getCurrentUser()
 
-    suspend fun updateUserStatus(isOnline: Boolean): Resource<Unit>
+    suspend fun updateUserStatus(isOnline: Boolean)
 }
