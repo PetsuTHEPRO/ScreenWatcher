@@ -7,12 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ktx.database
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-import com.sloth.ScreenWatcher.auth.data.datasource.AuthRemoteDataSource
-import com.sloth.ScreenWatcher.auth.data.repository.AuthRepositoryImpl
+import com.sloth.ScreenWatcher.ScreenApplication
 import com.sloth.ScreenWatcher.databinding.FragmentMainRegisterBinding
 
 class RegisterFragment : Fragment() {
@@ -38,18 +33,8 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Inicialize o FirebaseAuth e FirebaseFirestore
-        val auth = FirebaseAuth.getInstance()
-        val db = FirebaseFirestore.getInstance()
-        val realtimeDb = Firebase.database.reference // Adicione esta linha
-
-        // Crie a instância do AuthRemoteDataSource manualmente
-        val authRemoteDataSource = AuthRemoteDataSource(auth, db, realtimeDb)
-
-        // Crie a instância do AuthRepository manualmente
-        val authRepository = AuthRepositoryImpl(authRemoteDataSource)
-
-        // Crie a instância da fábrica do ViewModel
-        val factory = RegisterViewModelFactory(authRepository)
+        val app = requireActivity().application as ScreenApplication
+        val factory = RegisterViewModelFactory(app.authRepository)
 
         // Instancie o ViewModel
         registerViewModel = ViewModelProvider(this, factory)[RegisterViewModel::class.java]

@@ -7,15 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ktx.database
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import com.sloth.ScreenWatcher.R
-import com.sloth.ScreenWatcher.auth.data.datasource.AuthRemoteDataSource
-import com.sloth.ScreenWatcher.auth.data.repository.AuthRepositoryImpl
+import com.sloth.ScreenWatcher.ScreenApplication
 import com.sloth.ScreenWatcher.databinding.FragmentMainLoginBinding
-import com.sloth.ScreenWatcher.ui.presentation.AuthActivity
 import com.sloth.ScreenWatcher.ui.presentation.login.LoginViewModelFactory
 import com.sloth.ScreenWatcher.ui.presentation.register.RegisterFragment
 
@@ -40,18 +34,8 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Inicialize o FirebaseAuth e FirebaseFirestore
-        val auth = FirebaseAuth.getInstance()
-        val db = FirebaseFirestore.getInstance()
-        val realtimeDb = Firebase.database.reference // Adicione esta linha
-
-        // Crie a instância do AuthRemoteDataSource manualmente
-        val authRemoteDataSource = AuthRemoteDataSource(auth, db, realtimeDb)
-
-        // Crie a instância do AuthRepository manualmente
-        val authRepository = AuthRepositoryImpl(authRemoteDataSource)
-
-        // Crie a instância da fábrica do ViewModel
-        val factory = LoginViewModelFactory(authRepository)
+        val app = requireActivity().application as ScreenApplication
+        val factory = LoginViewModelFactory(app.authRepository)
 
         // Instancie o ViewModel
         loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
@@ -70,9 +54,9 @@ class LoginFragment : Fragment() {
 
         // Configura clique do botão
         binding.loginButton.setOnClickListener {
-            val email = binding.email.text.toString()
+            val username = binding.email.text.toString()
             val password = binding.password.text.toString()
-            loginViewModel.login(email, password)
+            loginViewModel.login(username, password)
         }
 
         // Configura o clique no texto de registro

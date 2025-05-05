@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#1E1E2A">
+
+    <!-- Título -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Suas Conexões"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Grid 2x2 -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:columnOrderPreserved="false">
+
+        <!-- Conexão 1 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/connection1Image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_image"/>
+
+            <TextView
+                android:id="@+id/connection1Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conexão #1"
+                android:textColor="#666"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <!-- Conexão 2 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/connection2Image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_image"/>
+
+            <TextView
+                android:id="@+id/connection2Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conexão #2"
+                android:textColor="#666"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <!-- Conexão 3 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/connection3Image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_image"/>
+
+            <TextView
+                android:id="@+id/connection3Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conexão #3"
+                android:textColor="#666"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <!-- Conexão 4 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/connection4Image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_image"/>
+
+            <TextView
+                android:id="@+id/connection4Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conexão #4"
+                android:textColor="#666"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+    </GridLayout>
+
+    <!-- Botão para adicionar conexão -->
+    <Button
+        android:id="@+id/addConnectionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Adicionar Conexão"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFF"/>
+
+</LinearLayout>

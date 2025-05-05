@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fundo cinza (quadrado) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#EEEEEE"/> <!-- Cinza claro -->
+            <stroke android:width="1dp" android:color="#CCCCCC"/> <!-- Borda -->
+            <corners android:radius="5dp"/> <!-- Cantos arredondados -->
+        </shape>
+    </item>
+
+    <!-- Ícone de "sem imagem" (opcional) -->
+    <item android:drawable="@android:drawable/ic_menu_gallery"
+    android:width="24dp"
+    android:height="24dp"
+    android:gravity="center"/>
+</layer-list>

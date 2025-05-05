@@ -1,105 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:background="#292A2D">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="#1E1E2A">
 
-    <!-- Título -->
+    <!-- Título de boas vindas -->
     <TextView
-        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bem vindo, fique a vontade!"
-        android:textSize="24sp"
+        android:text="Bem vindo de volta!"
+        android:textSize="32sp"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="68dp"/>
+        android:layout_marginBottom="15dp"
+        android:fontFamily="sans-serif-medium"/>
 
+    <!-- Subtítulo -->
     <TextView
-        android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Faça seu login"
+        android:textSize="18sp"
         android:textColor="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginBottom="48dp"
+        android:fontFamily="sans-serif"/>
 
-    <!-- Campo de Email -->
+    <!-- Campo de usuário -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        app:layout_constraintTop_toBottomOf="@id/subtitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp">
+        android:layout_marginBottom="16dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:importantForAutofill="yes"
-            tools:ignore="LabelFor"/>
-
+            android:hint="Usuário"
+            android:inputType="text"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#999999"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Campo de Senha -->
+    <!-- Campo de senha -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Senha"
-        app:layout_constraintTop_toBottomOf="@id/emailLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
+        android:layout_marginBottom="32dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Senha"
             android:inputType="textPassword"
-            android:importantForAutofill="yes"
-            tools:ignore="LabelFor"/>
-
+            android:textColor="#333333"
+            android:textColorHint="#999999"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Botão de Login -->
-    <Button
+    <!-- Botão de entrar -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:text="Entrar"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#6200EE"
-        app:layout_constraintTop_toBottomOf="@id/passwordLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        android:textColor="#1E1E2A"
+        android:backgroundTint="#FFFFFF"
+        app:cornerRadius="10dp"
+        app:strokeColor="#1E1E2A"
+        app:strokeWidth="1dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:fontFamily="sans-serif-medium"/>
 
-    <!-- Link para Registrar -->
-    <TextView
-        android:id="@+id/registerLink"
-        android:layout_width="wrap_content"
+    <!-- Container para o texto de cadastro com área clicável maior -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Não tem conta? Registre-se"
-        android:textColor="#6200EE"
-        app:layout_constraintTop_toBottomOf="@id/loginButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Não tem uma conta? "
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/registerLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cadastrar-se"
+            android:textColor="#14D79B"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="none"/>
+
+    </LinearLayout>
+
+</LinearLayout>

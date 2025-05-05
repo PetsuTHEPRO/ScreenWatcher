@@ -4,12 +4,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sloth.ScreenWatcher.auth.data.repository.AuthRepositoryImpl
-import kotlinx.coroutines.delay
+import com.sloth.ScreenWatcher.auth.domain.repository.AuthRepository
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(
-    private val repository: AuthRepositoryImpl
+    private val repository: AuthRepository
 ) : ViewModel() {
 
     val registerResult = MutableLiveData<Result<Unit>>()

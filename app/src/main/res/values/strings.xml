@@ -8,6 +8,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="default_avatar_url">https://api.dicebear.com/8.x/avataaars/png?seed=Default&amp;eyes=xDizzy&amp;skinColor=d08b5b&amp;top=dreads01</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

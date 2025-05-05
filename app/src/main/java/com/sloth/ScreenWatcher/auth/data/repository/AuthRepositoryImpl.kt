@@ -9,12 +9,19 @@ class AuthRepositoryImpl(
     private val remoteDataSource: AuthRemoteDataSource
 ) : AuthRepository {
 
-    override suspend fun login(email: String, password: String): Resource<AuthUser> {
+    override suspend fun login(username: String, password: String): Resource<AuthUser> {
         return try {
-            val user = remoteDataSource.login(email, password)
-            Resource.Success(user)
+            val user = remoteDataSource.login(username, password)
+
+            // Se o login retornar usuário vazio, trata como erro
+            if (user.basicInfo.username.isEmpty()) {
+                Resource.Error("Usuário ou senha incorretos")
+            } else {
+                Resource.Success(user)
+            }
+
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Login failed")
+            Resource.Error(e.message ?: "Erro desconhecido no login")
         }
     }
 

@@ -9,6 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.sloth.ScreenWatcher.databinding.ActivityMainBinding
+import com.sloth.ScreenWatcher.ui.connections.ConnectionActivity
 import com.sloth.ScreenWatcher.ui.presentation.AuthActivity
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
 
-        val intent = Intent(this, AuthActivity::class.java)
+        val intent = Intent(this, ConnectionActivity::class.java)
         startActivity(intent)
     }
 

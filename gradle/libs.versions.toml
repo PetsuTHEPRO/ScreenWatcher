@@ -19,6 +19,9 @@ firebaseCrashlyticsBuildtools = "3.0.3"
 firebaseFirestoreKtx = "25.1.4"
 fragmentKtx = "1.5.6"
 firebaseDatabaseKtx = "21.0.0"
+activity = "1.8.0"
+lifecycleViewmodelAndroid = "2.8.7"
+baselibrary = "3.2.0-alpha11"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -39,6 +42,9 @@ firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "fireb
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-lifecycle-viewmodel-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-android", version.ref = "lifecycleViewmodelAndroid" }
+androidx-baselibrary = { group = "androidx.databinding", name = "baseLibrary", version.ref = "baselibrary" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

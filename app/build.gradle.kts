@@ -58,7 +58,13 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.espresso.core)
     implementation(libs.firebase.database.ktx)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.lifecycle.viewmodel.android)
+    implementation(libs.androidx.baselibrary)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("org.springframework.security:spring-security-crypto:5.7.3")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 }
