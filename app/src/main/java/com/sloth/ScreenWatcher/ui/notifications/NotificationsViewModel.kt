@@ -1,4 +1,4 @@
-package com.example.ScreenWatcher.ui.notifications
+package com.sloth.ScreenWatcher.ui.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

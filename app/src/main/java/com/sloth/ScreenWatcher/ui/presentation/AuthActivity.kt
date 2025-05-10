@@ -2,7 +2,7 @@ package com.sloth.ScreenWatcher.ui.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.ScreenWatcher.ui.login.LoginFragment
+import com.sloth.ScreenWatcher.ui.login.LoginFragment
 import com.sloth.ScreenWatcher.R
 
 class AuthActivity : AppCompatActivity() {

@@ -3,16 +3,17 @@ package com.sloth.ScreenWatcher.auth.data.datasource
 import android.util.Log
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ServerValue
-import com.google.firebase.firestore.FirebaseFirestore
+import com.sloth.ScreenWatcher.auth.data.session.SessionManager
 import com.sloth.ScreenWatcher.auth.domain.model.AuthUser
 import com.sloth.ScreenWatcher.auth.domain.model.BasicInfo
+import com.sloth.ScreenWatcher.auth.domain.model.UserConnection
 import com.sloth.ScreenWatcher.auth.domain.model.UserStatus
 import kotlinx.coroutines.tasks.await
 import java.security.MessageDigest
 import kotlin.random.Random
 
 class AuthRemoteDataSource(
-    private val db: FirebaseFirestore,
+    private val sessionManager: SessionManager,
     private val realtimeDb: DatabaseReference // Adicione esta linha
 ) {
     suspend fun login(usernameOrEmail: String, password: String): AuthUser {
@@ -39,10 +40,13 @@ class AuthRemoteDataSource(
                     (basicInfo.username == usernameOrEmail || basicInfo.email == usernameOrEmail) &&
                     verifyPassword(password, basicInfo.passwordHash)) {
 
+                    sessionManager.saveUserToken(basicInfo.username, basicInfo.email);
+                    Log.i("SCREEN_WATCHER", sessionManager.getUsername().toString())
                     return AuthUser(
                         id = userSnapshot.key ?: "",
                         basicInfo = basicInfo,
-                        status = status ?: UserStatus()
+                        status = status ?: UserStatus(),
+                        connections = UserConnection()
                     )
                 }
             }
@@ -52,6 +56,10 @@ class AuthRemoteDataSource(
             Log.e("SCREEN_WATCHER", "Falha no login", e)
             throw Exception("Falha na autenticação. Tente novamente.")
         }
+    }
+
+    fun getCurrentUsername(): String? {
+        return sessionManager.getUsername()
     }
 
     suspend fun register(email: String, password: String, username: String): Result<Unit> {
@@ -108,12 +116,4 @@ class AuthRemoteDataSource(
         return hash == newHash
     }
 
-    private suspend fun getUserFromFirestore(userId: String): AuthUser {
-        return db.collection("users")
-            .document(userId)
-            .get()
-            .await()
-            .toObject(AuthUser::class.java)
-            ?: throw Exception("Dados do usuário não encontrados")
-    }
 }

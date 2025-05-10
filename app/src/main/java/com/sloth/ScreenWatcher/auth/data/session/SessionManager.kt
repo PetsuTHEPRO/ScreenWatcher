@@ -1,33 +1,46 @@
 package com.sloth.ScreenWatcher.auth.data.session
 
-import android.content.Context
-import com.sloth.ScreenWatcher.auth.domain.model.BasicInfo
+import com.sloth.ScreenWatcher.auth.data.datasource.PreferencesManager
 
-// SessionManager.kt
-class SessionManager(context: Context) {
-    private val sharedPref = context.getSharedPreferences("USER_SESSION", Context.MODE_PRIVATE)
-    private val editor = sharedPref.edit()
-
-    fun saveUserSession(user: BasicInfo) {
-        editor.putString("USERNAME", user.username)
-        editor.putString("EMAIL", user.email)
-        editor.putBoolean("IS_LOGGED_IN", true)
-        editor.apply()
+class SessionManager(
+    private val preferencesManager: PreferencesManager
+) {
+    companion object {
+        private const val USERNAME = "username"
+        private const val CURRENT_CONNECTION = "current_connection"
+        private const val EMAIL = "email"
+        private const val KEY_IS_LOGGED_IN = "is_logged_in"
     }
 
-    fun getCurrentUser(): BasicInfo? {
-        return if (sharedPref.getBoolean("IS_LOGGED_IN", false)) {
-            BasicInfo(
-                username = sharedPref.getString("USERNAME", "")!!,
-                email = sharedPref.getString("EMAIL", "")!!,
-            )
-        } else {
-            null
-        }
+    // Salva o token do usuário
+    fun saveUserToken(username: String, email: String) {
+        preferencesManager.saveString(USERNAME, username)
+        preferencesManager.saveString(EMAIL, email)
+        preferencesManager.saveString(KEY_IS_LOGGED_IN, "true")
     }
 
-    fun clearSession() {
-        editor.clear()
-        editor.apply()
+    // Verifica se o usuário está logado
+    fun isLoggedIn(): Boolean {
+        return preferencesManager.getString(KEY_IS_LOGGED_IN) == "true"
+    }
+
+    fun getUsername(): String? {
+        return preferencesManager.getString(USERNAME)
+    }
+
+    fun getCurrentConnection(): String? {
+        return preferencesManager.getString(CURRENT_CONNECTION)
+    }
+
+    fun setCurrentConnection(connectionId: String) {
+        preferencesManager.saveString(CURRENT_CONNECTION, connectionId)
+    }
+
+    // Finaliza a sessão
+    fun logout() {
+        preferencesManager.remove(USERNAME)
+        preferencesManager.remove(EMAIL)
+        preferencesManager.remove(CURRENT_CONNECTION)
+        preferencesManager.saveString(KEY_IS_LOGGED_IN, "false")
     }
 }

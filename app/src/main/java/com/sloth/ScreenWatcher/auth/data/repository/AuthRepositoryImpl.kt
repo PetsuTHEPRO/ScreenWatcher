@@ -33,8 +33,8 @@ class AuthRepositoryImpl(
         TODO("Not yet implemented")
     }
 
-    override fun getCurrentUser() {
-        TODO("Not yet implemented")
+    override fun getCurrentToken(): String? {
+        return remoteDataSource.getCurrentUsername()
     }
 
     override suspend fun updateUserStatus(isOnline: Boolean) {

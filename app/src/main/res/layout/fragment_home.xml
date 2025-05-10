@@ -7,7 +7,8 @@
     android:background="#1E1E2A"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="5dp"
+    tools:context=".ui.home.HomeFragment">
 
     <!-- Ícone de Status (será alterado programaticamente) -->
     <ImageView

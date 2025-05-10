@@ -14,7 +14,7 @@ interface AuthRepository {
 
     suspend fun logout()
 
-    fun getCurrentUser()
+    fun getCurrentToken(): String?
 
     suspend fun updateUserStatus(isOnline: Boolean)
 }

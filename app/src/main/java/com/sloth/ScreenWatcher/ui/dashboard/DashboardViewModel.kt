@@ -1,4 +1,4 @@
-package com.example.ScreenWatcher.ui.dashboard
+package com.sloth.ScreenWatcher.ui.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

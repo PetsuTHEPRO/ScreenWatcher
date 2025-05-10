@@ -1,5 +1,6 @@
-package com.example.ScreenWatcher.ui.login
+package com.sloth.ScreenWatcher.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.sloth.ScreenWatcher.R
 import com.sloth.ScreenWatcher.ScreenApplication
 import com.sloth.ScreenWatcher.databinding.FragmentMainLoginBinding
+import com.sloth.ScreenWatcher.ui.connections.ConnectionActivity
 import com.sloth.ScreenWatcher.ui.presentation.login.LoginViewModelFactory
 import com.sloth.ScreenWatcher.ui.presentation.register.RegisterFragment
 
@@ -46,6 +48,8 @@ class LoginFragment : Fragment() {
                 if (it.isSuccess) {
                     Toast.makeText(requireContext(), "Login bem-sucedido!", Toast.LENGTH_SHORT).show()
                     // Navegar para próxima tela
+                    startActivity(Intent(requireContext(), ConnectionActivity::class.java))
+                    requireActivity().finish()
                 } else {
                     Toast.makeText(requireContext(), "Erro: ${it.exceptionOrNull()?.message}", Toast.LENGTH_SHORT).show()
                 }

@@ -1,4 +1,4 @@
-package com.example.ScreenWatcher.ui.dashboard
+package com.sloth.ScreenWatcher.ui.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater

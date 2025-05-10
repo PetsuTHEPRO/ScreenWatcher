@@ -1,4 +1,4 @@
-package com.example.ScreenWatcher.ui.notifications
+package com.sloth.ScreenWatcher.ui.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater

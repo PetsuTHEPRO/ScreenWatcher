@@ -1,4 +1,4 @@
-package com.example.ScreenWatcher.ui.login
+package com.sloth.ScreenWatcher.ui.login
 
 import android.util.Log
 import androidx.lifecycle.LiveData

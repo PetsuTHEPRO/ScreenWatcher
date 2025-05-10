@@ -7,18 +7,40 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sloth.ScreenWatcher.auth.domain.model.Connection
 import com.sloth.ScreenWatcher.auth.domain.model.ConnectionStatus
+import com.sloth.ScreenWatcher.auth.domain.model.MyConnection
 import com.sloth.ScreenWatcher.auth.domain.repository.ConnectionRepository
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class ConnectionViewModel (
     private val repository: ConnectionRepository
 ) : ViewModel() {
 
     // Dados observáveis para cada conexão
-    val connection1 = MutableLiveData<Connection>()
-    val connection2 = MutableLiveData<Connection>()
-    val connection3 = MutableLiveData<Connection>()
-    val connection4 = MutableLiveData<Connection>()
+    val connection1 = MutableLiveData<MyConnection>()
+    val connection2 = MutableLiveData<MyConnection>()
+    val connection3 = MutableLiveData<MyConnection>()
+    val connection4 = MutableLiveData<MyConnection>()
+    val _currentUser = MutableLiveData<String>()
+    val currentUser: LiveData<String> = _currentUser
+
+    // Função direta (não suspensa) que retorna o valor imediatamente
+    fun getCurrentUser(): String? {
+        return runBlocking {
+            try {
+                repository.getCurrentUser()
+            } catch (e: Exception) {
+                Log.e("SCREEN_WATCHER", "Erro ao buscar usuário", e)
+                null
+            }
+        }
+    }
+
+    // Sealed class para encapsular o resultado
+    sealed class Result<out T> {
+        data class Success<out T>(val data: T) : Result<T>()
+        data class Error(val exception: Throwable) : Result<Nothing>()
+    }
 
     // Estados possíveis para as operações de conexão
     sealed class ConnectionState {
@@ -31,7 +53,7 @@ class ConnectionViewModel (
     // Estados para a lista de conexões
     sealed class ConnectionListState {
         object Loading : ConnectionListState()
-        data class Success(val connections: List<Connection>) : ConnectionListState()
+        data class Success(val connections: List<MyConnection>) : ConnectionListState()
         data class Error(val message: String) : ConnectionListState()
     }
 
@@ -59,18 +81,31 @@ class ConnectionViewModel (
         }
     }
 
-    // Carrega todas as conexões do usuário
     fun loadConnections(username: String) {
         _connectionListState.value = ConnectionListState.Loading
         viewModelScope.launch {
             repository.getConnectionsForUser(username)
                 .onSuccess { connections ->
-                    _connectionListState.value = ConnectionListState.Success(connections)
+                    // Ordena as conexões pela data de criação, mais antigas primeiro
+                    val sortedConnections = connections.sortedBy { it.createdAt } // Assuming 'createdAt' exists
+
+                    _connectionListState.value = ConnectionListState.Success(sortedConnections)
+
+                    // Atualiza as conexões observáveis para cada posição do grid
+                    updateLiveDataWithConnections(sortedConnections)
                 }
                 .onFailure { e ->
                     _connectionListState.value = ConnectionListState.Error(e.message ?: "Erro ao carregar conexões")
                 }
         }
+    }
+
+    private fun updateLiveDataWithConnections(connections: List<MyConnection>) {
+        // Preenche as conexões nos slots da UI, até o máximo de 4
+        connection1.value = connections.getOrNull(0)
+        connection2.value = connections.getOrNull(1)
+        connection3.value = connections.getOrNull(2)
+        connection4.value = connections.getOrNull(3)
     }
 
     // Atualiza o status de uma conexão
@@ -81,5 +116,17 @@ class ConnectionViewModel (
                     _connectionState.value = ConnectionState.Error(e.message ?: "Erro ao atualizar status")
                 }
         }
+    }
+
+    fun logout() {
+        repository.logout()
+    }
+
+    fun setConnectionId(connectionId: String?) {
+        repository.setCurrentConnectionId(connectionId)
+    }
+
+    fun getConnectionId(): String? {
+        return repository.getCurrentConnectionId()
     }
 }

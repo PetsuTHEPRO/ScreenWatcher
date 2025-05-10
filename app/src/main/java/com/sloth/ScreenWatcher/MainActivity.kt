@@ -1,16 +1,22 @@
 package com.sloth.ScreenWatcher
 
+import android.content.DialogInterface
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sloth.ScreenWatcher.databinding.ActivityMainBinding
 import com.sloth.ScreenWatcher.ui.connections.ConnectionActivity
-import com.sloth.ScreenWatcher.ui.presentation.AuthActivity
+import com.sloth.ScreenWatcher.ui.home.HomeFragment
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,9 +41,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
-        val intent = Intent(this, ConnectionActivity::class.java)
-        startActivity(intent)
     }
 
 }

@@ -1,21 +1,21 @@
 package com.sloth.ScreenWatcher.ui.home
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.sloth.ScreenWatcher.R
+import com.sloth.ScreenWatcher.ScreenApplication
 import com.sloth.ScreenWatcher.databinding.FragmentHomeBinding
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import com.sloth.ScreenWatcher.ui.connections.ConnectionViewModel
+import com.sloth.ScreenWatcher.ui.connections.ConnectionViewModelFactory
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    private lateinit var homeViewModel: HomeViewModel
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,37 +26,20 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val app = requireActivity().application as ScreenApplication
+        val factory = HomeViewModelFactory(app.connectionRepository)
+
         val homeViewModel =
-            ViewModelProvider(this)[HomeViewModel::class.java]
+            ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        homeViewModel.statusTela.observe(viewLifecycleOwner) {
-            updateScreenStatus(it)
+        val textView: TextView = binding.statusText
+        homeViewModel.text.observe(viewLifecycleOwner) {
+            textView.text = it
         }
-
-        //homeViewModel.checkScreenStatuses("usuario_atual", "yuri")
-
         return root
-    }
-
-    private fun updateScreenStatus(isScreenOn: Boolean) {
-        if (!isAdded || _binding == null) return
-
-        if (isScreenOn) {
-            binding.statusIcon.setImageResource(R.drawable.ic_screen_on)
-            binding.statusText.text = "Tela Ligada"
-            binding.statusText.setTextColor(Color.GREEN)
-            binding.statusDetails.text = "Ativa agora"
-        } else {
-            binding.statusIcon.setImageResource(R.drawable.ic_screen_off)
-            binding.statusText.text = "Tela Desligada"
-            binding.statusText.setTextColor(Color.RED)
-
-            val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-            binding.statusDetails.text = "Inativa desde ${timeFormat.format(Date())}"
-        }
     }
 
     override fun onDestroyView() {
